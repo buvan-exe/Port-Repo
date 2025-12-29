@@ -3,6 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <title>Developer Portfolio Journey</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
@@ -69,7 +70,7 @@
       width: 100%;
       height: 100%;
       position: absolute;
-      top: 0;
+      top: 0%;
       left: 0;
       display: flex;
       align-items: center;
@@ -77,7 +78,74 @@
       background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
       z-index: 10;
       transition: opacity 1.2s ease, transform 1.5s ease;
-    }
+      background:
+      radial-gradient(circle at top right, rgba(255, 215, 130, 0.08), transparent 40%),
+      radial-gradient(circle at bottom left, rgba(120, 180, 255, 0.08), transparent 45%),
+      linear-gradient(135deg, #0e0e11 0%, #14141a 50%, #0b0b0e 100%);
+      overflow: hidden;
+}
+
+/* ===== PARALLAX STARFIELD (SPACE PORTFOLIO STYLE) ===== */
+
+.star-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: repeat;
+}
+
+/* Far stars (tiny & slow) */
+.star-layer.far {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #ffffff 100%, transparent),
+    radial-gradient(1px 1px at 70% 80%, #ffffff 100%, transparent),
+    radial-gradient(1px 1px at 40% 60%, #ffffff 100%, transparent);
+  background-size: 400px 400px;
+  opacity: 0.35;
+  animation: starDriftFar 180s linear infinite;
+}
+
+/* Mid stars */
+.star-layer.mid {
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 40%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 50% 20%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 90% 70%, #ffffff 100%, transparent);
+  background-size: 300px 300px;
+  opacity: 0.5;
+  animation: starDriftMid 120s linear infinite;
+}
+
+/* Near stars (slightly brighter & faster) */
+.star-layer.near {
+  background-image:
+    radial-gradient(2px 2px at 30% 50%, #ffffff 100%, transparent),
+    radial-gradient(2px 2px at 60% 10%, #ffffff 100%, transparent),
+    radial-gradient(2px 2px at 80% 90%, #ffffff 100%, transparent);
+  background-size: 220px 220px;
+  opacity: 0.65;
+  animation: starDriftNear 80s linear infinite;
+}
+
+/* ===== STAR ANIMATIONS ===== */
+
+@keyframes starDriftFar {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-800px); }
+}
+
+@keyframes starDriftMid {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-1200px); }
+}
+
+@keyframes starDriftNear {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-1600px); }
+}
+
+    
 
     .entrance-scene.opening {
       transform: scale(1.3);
@@ -91,6 +159,16 @@
       height: 700px;
       perspective: 2000px;
     }
+    
+    .door-container::before {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 200, 120, 0.15), transparent 70%);
+  filter: blur(40px);
+  z-index: -1;
+}
+
 
     .door-frame-outer {
       position: absolute;
@@ -201,6 +279,91 @@
       stroke-width: 1;
     }
 
+    /* ===== SPACE DOOR SKIN ===== */
+
+.door-left,
+.door-right {
+  background: linear-gradient(
+    180deg,
+    #0b1026 0%,
+    #141a3a 50%,
+    #0b1026 100%
+  );
+  border: 2px solid rgba(120, 180, 255, 0.45);
+  box-shadow:
+    inset 0 0 40px rgba(120, 180, 255, 0.15),
+    0 0 60px rgba(120, 180, 255, 0.35);
+}
+
+/* Neon rim glow */
+.door-left::before,
+.door-right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 25px rgba(120, 180, 255, 0.6),
+    0 0 40px rgba(120, 180, 255, 0.45);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Replace wooden panels with energy panels */
+.door-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(92, 225, 230, 0.25),
+    rgba(139, 124, 255, 0.25)
+  );
+  border: 1px solid rgba(120, 180, 255, 0.6);
+  box-shadow:
+    inset 0 0 20px rgba(120, 180, 255, 0.5);
+}
+
+/* Animate subtle energy movement */
+.door-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.18),
+    transparent 65%
+  );
+  animation: energyPulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes energyPulse {
+  0%   { opacity: 0.25; }
+  50%  { opacity: 0.45; }
+  100% { opacity: 0.25; }
+}
+.door-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -6%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: energySweep 6s linear infinite;
+  pointer-events: none;
+}
+
+
+/* Remove old handle look */
+.door-handle {
+  background: radial-gradient(circle, #5ce1e6, #3a7bd5);
+  box-shadow: 0 0 20px rgba(92, 225, 230, 0.8);
+}
+
     .entrance-text {
       position: absolute;
       bottom: 8%;
@@ -221,35 +384,75 @@
       }
     }
 
+    /* STAR FIELD */
+.entrance-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, white 100%, transparent),
+    radial-gradient(1px 1px at 30% 80%, white 100%, transparent),
+    radial-gradient(1px 1px at 70% 40%, white 100%, transparent),
+    radial-gradient(1px 1px at 90% 60%, white 100%, transparent),
+    radial-gradient(1px 1px at 50% 50%, white 100%, transparent);
+
+  background-size: 300px 300px;
+  opacity: 0.4;
+}
+
+@keyframes starDrift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-60px); }
+}
+
+.entrance-scene::before {
+  animation: starDrift 60s linear infinite;
+}
+
     .entrance-title {
-      font-size: 3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-    }
+  font-family: 'Playfair Display', serif;
+  font-size: 3.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #f6d365, #fda085);
+   -webkit-background-clip: text;
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+  margin-bottom: 0.8rem;
+}
+
 
     .entrance-subtitle {
-      font-size: 1.3rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: rgba(230, 230, 240, 0.75);
+}
+
 
     .enter-button {
-      background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
-      color: white;
-      border: none;
-      padding: 1rem 3rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
-      font-family: inherit;
-    }
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f6d365, #fda085);
+  color: #1a1a1a;
+  border: none;
+  padding: 1rem 3.2rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 15px 40px rgba(253, 160, 133, 0.35);
+}
+
+.enter-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 60px rgba(253, 160, 133, 0.55);
+}
+
 
     .enter-button:hover {
       transform: translateY(-3px);
@@ -500,8 +703,8 @@
       font-weight: 800;
       background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
 
@@ -553,8 +756,8 @@
       text-align: center;
       background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool));
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* Projects Grid */
@@ -834,6 +1037,16 @@
   z-index: 1;
 }
 
+.entrance-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+
 @keyframes slowDrift {
   0% {
     transform: translateY(0) scale(1);
@@ -852,6 +1065,10 @@
  <body>
   <div class="portfolio-wrapper"><!-- Entrance Scene -->
    <div class="entrance-scene" id="entrance">
+    <div class="star-layer far"></div>
+     <div class="star-layer mid"></div>
+      <div class="star-layer near"></div>
+
     <div class="door-container" id="doorContainer">
      <div class="door-frame-outer">
       <div class="door-left">
